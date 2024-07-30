@@ -1,0 +1,120 @@
+:root {
+  --bg: #0e212f;
+  --bg-sidebar: #213642;
+  --bg-button: #01e601;
+  --text: #cdcec7;
+}
+
+/* slider tracker #4391e7 */
+/* balance text #a7d5e5 */
+
+body {
+  color: var(--text);
+  background-color: var(--bg);
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+button {
+  background-color: var(--bg-button);
+  font-size: medium;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.dice-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.dice-sidebar {
+  background-color: var(--bg-sidebar);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.amount-multiplier {
+  cursor: pointer;
+  user-select: none;
+  padding: 5px;
+  background-color: lightgray;
+  color: black;
+  margin-right: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.dice-sidebar-amount {
+  font-size: large;
+  font-weight: bold;
+}
+
+.dice-sidebar input {
+  width: 100px;
+  height: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: large;
+}
+
+.dice-sidebar button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.dice-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  height: 400px;
+}
+
+.dice-game input {
+  width: 500px;
+  height: 50px;
+  margin: 0;
+  cursor: pointer;
+  background: transparent;
+}
+
+.dice-game-stats {
+  display: flex;
+  font-size: large;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.dice-game-result {
+  font-size: x-large;
+  text-align: center;
+}
+
+.dice-game-result-won {
+  color: greenyellow;
+}
+
+.dice-game-result-lost {
+  color: red;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  font-size: large;
+}
+
+.navbar p{
+  color: greenyellow;
+  margin-right: 10px;
+  text-decoration: underline;
+}
+
+.navbar p:active{
+  color: #cdcec7;
+  text-decoration: underline;
+}
