@@ -20,6 +20,10 @@ export const Dice = () => {
         const random: number = Math.floor((Math.random() * 100));
 
         if(amount && winChance && winnings) {
+            if(amount > balance) {
+                alert("No funds");
+                return
+            }
             if(random >= winChance) {
                 setBalance(balance - amount);
                 setWinningAmount(amount);
@@ -49,8 +53,8 @@ export const Dice = () => {
         <div>
             <div>
                 <div>
-                    <h2>Dice</h2>
-                    <h1>Balance: { balance }</h1>
+                    <h1>Dice</h1>
+                    <h2>Balance: { balance }</h2>
                 </div>
                 <div className="dice-container">
                     <div className="dice-sidebar">

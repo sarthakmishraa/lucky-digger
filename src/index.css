@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/coolvetica-2');
+
 :root {
   --bg: #0e212f;
   --bg-sidebar: #213642;
@@ -9,15 +11,22 @@
 /* balance text #a7d5e5 */
 
 body {
+  font-family: "Coolvetica", sans-serif;
+  font-weight: lighter;
   color: var(--text);
   background-color: var(--bg);
   padding-left: 200px;
   padding-right: 200px;
 }
 
+h1, h2, h3 {
+  font-weight: lighter;
+}
+
 button {
   background-color: var(--bg-button);
   font-size: medium;
+  font-weight: bold;
   padding: 5px;
   border-radius: 10px;
   cursor: pointer;
@@ -43,9 +52,9 @@ button {
   padding: 5px;
   background-color: lightgray;
   color: black;
-  margin-right: 10px;
+  margin: 10px;
   border-radius: 5px;
-  font-weight: bold;
+  font-weight: lighter;
 }
 
 .dice-sidebar-amount {
@@ -56,8 +65,7 @@ button {
 .dice-sidebar input {
   width: 100px;
   height: 25px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px;
   font-size: large;
 }
 
@@ -117,4 +125,23 @@ button {
 .navbar p:active{
   color: #cdcec7;
   text-decoration: underline;
+}
+
+@media screen and (max-width: 700px) {
+  body {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  .dice-container {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+  .dice-game input {
+    width: 350px;
+  }
+  .dice-game-stats {
+    display: flex;
+    flex-direction: column;
+  }
 }
