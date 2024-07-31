@@ -9,7 +9,7 @@ export const Dice = () => {
     const amountRef = useRef<any>();
 
     const modifyAmount = (multiplier: number) => {
-        if (amount && amount*multiplier<=100 && amount*multiplier>1){
+        if (amount && amount*multiplier<=100 && amount*multiplier>=1){
             amountRef.current.value = amount*multiplier;
             setAmount(amount*multiplier);
         }
@@ -21,7 +21,7 @@ export const Dice = () => {
 
         if(amount && winChance && winnings) {
             if(amount > balance) {
-                alert("No funds");
+                alert("Insufficent funds");
                 return
             }
             if(random >= winChance) {
