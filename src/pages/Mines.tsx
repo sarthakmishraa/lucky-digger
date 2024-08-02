@@ -3,6 +3,7 @@ import { Card } from "../components/Card";
 
 export const Mines = () => {
     const [amount, setAmount] = useState<number | undefined>(1);
+    const [betAmount, setBetAmount] = useState<number | undefined>(amount);
     const [balance, setBalance] = useState<number>(3000);
     const [mines, setMines] = useState<number>(1);
     const [arr, setArr] = useState<number[]>(Array(25).fill(1));
@@ -33,12 +34,28 @@ export const Mines = () => {
         });
 
         setArr(array);
+    };
+
+    const cashoutBetAmount = () => {
+        if(betAmount) {
+            setBalance(balance + betAmount);
+            setGameStarted(false);
+        }
     }
 
     const handleSubmit = (event: any) => {
         event?.preventDefault();
-        canvasArr();
-        setGameStarted(true);
+        if(amount) {
+            if(amount>balance){
+                alert("Insufficient funds");
+            }
+            else{
+                setBalance(balance - amount);
+                setBetAmount(amount);
+                canvasArr();
+                setGameStarted(true);
+            }
+        }    
     };
 
     return(
@@ -93,12 +110,24 @@ export const Mines = () => {
                         </div>
                         <div>
                             <button type="submit" disabled={gameStarted} >Play</button>
+                            <button disabled={!gameStarted} onClick={cashoutBetAmount} >Cashout</button>
                         </div>
                     </form>
+                    {gameStarted && <h2>Amount in this bet: { betAmount }</h2>}
                 </div>
                 <div className="mines-game">
                     {
-                        gameStarted && arr.map((value: number) => <Card value={value} />)
+                        gameStarted && arr.map((value: number) => 
+                            <Card
+                                value={value}
+                                balance={balance}
+                                setBalance={setBalance}
+                                amount={amount as number}
+                                betAmount={betAmount as number}
+                                setBetAmount={setBetAmount}
+                                setGameStarted={setGameStarted as React.Dispatch<React.SetStateAction<boolean>>}
+                            />
+                        )
                     }
                 </div>
             </div>
