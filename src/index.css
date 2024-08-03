@@ -138,12 +138,16 @@ button {
   border-radius: 5px;
 }
 
-.mines-card-safe:active {
-  background-color: var(--bg-button);
-}
-
 .mines-card-bomb:active {
   background-color: red;
+}
+
+.mines-card-safe-clicked {
+  width: 114px;
+  height: 114px;
+  border-radius: 5px;
+  pointer-events: none;
+  background-color: var(--bg-button);
 }
 
 .navbar {

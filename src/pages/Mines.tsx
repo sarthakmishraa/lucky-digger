@@ -8,6 +8,7 @@ export const Mines = () => {
     const [mines, setMines] = useState<number>(1);
     const [arr, setArr] = useState<number[]>(Array(25).fill(1));
     const [gameStarted, setGameStarted] = useState<boolean>(false);
+    const [minesClicked, setMinesClicked] = useState<number>(0);
 
     const amountRef = useRef<any>();
 
@@ -39,6 +40,7 @@ export const Mines = () => {
     const cashoutBetAmount = () => {
         if(betAmount) {
             setBalance(balance + betAmount);
+            setMinesClicked(0);
             setGameStarted(false);
         }
     }
@@ -62,7 +64,7 @@ export const Mines = () => {
         <>
             <div>
                 <h1>Mines</h1>
-                <h2>Balance: { balance }</h2>
+                <h2>Balance: { balance } USD</h2>
             </div>
             <div className="mines-container">
                 <div className="mines-sidebar">
@@ -102,7 +104,7 @@ export const Mines = () => {
                                     onChange={(event) => setMines(parseInt(event.target.value))}
                                     placeholder="Mines here"
                                     min={1}
-                                    max={24}
+                                    max={20}
                                     defaultValue={1}
                                     disabled={gameStarted}
                                 />
@@ -110,22 +112,29 @@ export const Mines = () => {
                         </div>
                         <div>
                             <button type="submit" disabled={gameStarted} >Play</button>
-                            <button disabled={!gameStarted} onClick={cashoutBetAmount} >Cashout</button>
+                            {
+                                gameStarted &&
+                                <button disabled={!gameStarted} onClick={cashoutBetAmount} >Cashout {betAmount} USD</button> 
+                            }
+                            
                         </div>
                     </form>
-                    {gameStarted && <h2>Amount in this bet: { betAmount }</h2>}
                 </div>
                 <div className="mines-game">
                     {
-                        gameStarted && arr.map((value: number) => 
+                        gameStarted && arr.map((value: number, index: number) => 
                             <Card
                                 value={value}
+                                index={index}
                                 balance={balance}
-                                setBalance={setBalance}
+                                minesClicked={minesClicked}
                                 amount={amount as number}
                                 betAmount={betAmount as number}
+                                gameStarted={gameStarted}
+                                setBalance={setBalance}
                                 setBetAmount={setBetAmount}
                                 setGameStarted={setGameStarted as React.Dispatch<React.SetStateAction<boolean>>}
+                                setMinesClicked={setMinesClicked}
                             />
                         )
                     }
