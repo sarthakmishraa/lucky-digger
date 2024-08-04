@@ -1,14 +1,15 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Card } from "../components/Card";
 
 export const Mines = () => {
-    const [amount, setAmount] = useState<number | undefined>(1);
+    const [amount, setAmount] = useState<number | undefined>();
     const [betAmount, setBetAmount] = useState<number | undefined>(amount);
     const [balance, setBalance] = useState<number>(3000);
     const [mines, setMines] = useState<number>(1);
     const [arr, setArr] = useState<number[]>(Array(25).fill(1));
     const [gameStarted, setGameStarted] = useState<boolean>(false);
-    const [minesClicked, setMinesClicked] = useState<number>(0);
+    const [tilesClicked, setTilesClicked] = useState<number | undefined>(1);
+    const [multiplierValue, setMultiplierValue] = useState<number | undefined>();
 
     const amountRef = useRef<any>();
 
@@ -40,8 +41,9 @@ export const Mines = () => {
     const cashoutBetAmount = () => {
         if(betAmount) {
             setBalance(balance + betAmount);
-            setMinesClicked(0);
+            setTilesClicked(0);
             setGameStarted(false);
+            setMultiplierValue(undefined);
         }
     }
 
@@ -59,6 +61,14 @@ export const Mines = () => {
             }
         }    
     };
+
+    useEffect(() => {
+        if(tilesClicked) {
+            const rewardRate = 0.1;
+            const multiplier  = (1 + rewardRate)**tilesClicked;
+            setMultiplierValue(multiplier);
+        }
+    }, [tilesClicked])
 
     return(
         <>
@@ -79,8 +89,9 @@ export const Mines = () => {
                                     ref={amountRef}
                                     min={1}
                                     max={100.0}
-                                    defaultValue={1}
+                                    // defaultValue={1}
                                     disabled={gameStarted}
+                                    required
                                 />
                                 <span
                                     className="amount-multiplier"
@@ -107,6 +118,7 @@ export const Mines = () => {
                                     max={20}
                                     defaultValue={1}
                                     disabled={gameStarted}
+                                    required
                                 />
                             </div>
                         </div>
@@ -114,27 +126,34 @@ export const Mines = () => {
                             <button type="submit" disabled={gameStarted} >Play</button>
                             {
                                 gameStarted &&
-                                <button disabled={!gameStarted} onClick={cashoutBetAmount} >Cashout {betAmount} USD</button> 
+                                <button disabled={!gameStarted} onClick={cashoutBetAmount} >Cashout {betAmount?.toFixed(2)} USD</button> 
                             }
                             
                         </div>
+                        {
+                            gameStarted && multiplierValue && 
+                            <h3>Next: {multiplierValue?.toFixed(2)}x</h3>
+                        }
                     </form>
                 </div>
                 <div className="mines-game">
                     {
                         gameStarted && arr.map((value: number, index: number) => 
                             <Card
+                                key={index}
                                 value={value}
                                 index={index}
                                 balance={balance}
-                                minesClicked={minesClicked}
+                                mines={mines}
+                                tilesClicked={tilesClicked as number}
                                 amount={amount as number}
                                 betAmount={betAmount as number}
                                 gameStarted={gameStarted}
                                 setBalance={setBalance}
                                 setBetAmount={setBetAmount}
                                 setGameStarted={setGameStarted as React.Dispatch<React.SetStateAction<boolean>>}
-                                setMinesClicked={setMinesClicked}
+                                setTilesClicked={setTilesClicked as React.Dispatch<React.SetStateAction<number>>}
+                                setMultiplierValue={setMultiplierValue as React.Dispatch<React.SetStateAction<number | undefined>>}
                             />
                         )
                     }

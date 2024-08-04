@@ -32,6 +32,24 @@ button {
   cursor: pointer;
 }
 
+.home span {
+  color: var(--bg-button);
+  text-decoration: underline;
+}
+
+.images-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.images {
+  max-width: max-content;
+  border: 2px solid var(--text);
+  border-radius: 10px;
+  box-shadow: 10px 10px black;
+  margin: 10px;
+}
+
 .dice-container, .mines-container {
   display: flex;
   flex-direction: row;
@@ -183,5 +201,21 @@ button {
   .dice-game-stats {
     display: flex;
     flex-direction: column;
+  }
+  .mines-card-safe, .mines-card-bomb, .mines-card-safe-clicked {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media screen and (max-width: 1210px) {
+  .mines-container {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+  .mines-sidebar {
+    margin-top: 20px;
   }
 }

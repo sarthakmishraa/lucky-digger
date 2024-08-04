@@ -5,13 +5,15 @@ interface Props {
     index: number,
     balance: number,
     amount: number,
+    mines: number,
     betAmount: number,
-    minesClicked: number,
+    tilesClicked: number,
     gameStarted: boolean,
     setBalance: React.Dispatch<React.SetStateAction<number>>,
     setBetAmount: React.Dispatch<React.SetStateAction<number | undefined>>,
     setGameStarted: React.Dispatch<React.SetStateAction<boolean>>,
-    setMinesClicked: React.Dispatch<React.SetStateAction<number>>
+    setTilesClicked: React.Dispatch<React.SetStateAction<number>>
+    setMultiplierValue: React.Dispatch<React.SetStateAction<number | undefined>>
 }
 
 export const Card = (props: Props) => {
@@ -19,22 +21,30 @@ export const Card = (props: Props) => {
 
     const value = props.value;
     const index = props.index;
-    const betAmount = props.betAmount;
-    const minesClicked = props.minesClicked;
+    const amount = props.amount;
+    const tilesClicked = props.tilesClicked;
     const gameStarted = props.gameStarted;
+    const mines = props.mines;
 
     const setBetAmount = props.setBetAmount;
     const setGameStarted = props.setGameStarted;
-    const setMinesClicked = props.setMinesClicked;
+    const setTilesClicked = props.setTilesClicked;
+    const setMultiplierValue = props.setMultiplierValue;
 
     const wonBet = () => {
-        setBetAmount(betAmount + 1);
-        setMinesClicked(minesClicked + 1);
+        setTilesClicked(tilesClicked + 1);
+        const rewardRate = 0.1;
+        const multiplier  = (1 + rewardRate)**tilesClicked;
+        const reward = amount * multiplier;
+        const probSafeTile = (25 - tilesClicked - mines)/(25 - tilesClicked);
+        const temp = probSafeTile * reward;
+        setBetAmount(temp);
         mineRef.current.className = "mines-card-safe-clicked"
     }
     const lostBet = () => {
-        setMinesClicked(0);
+        setTilesClicked(0);
         setGameStarted(false);
+        setMultiplierValue(undefined);
     }
 
     return(
