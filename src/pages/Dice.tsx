@@ -54,7 +54,7 @@ export const Dice = () => {
             <div>
                 <div>
                     <h1>Dice</h1>
-                    <h2>Balance: { balance }</h2>
+                    <h2>Balance: { balance } USD</h2>
                 </div>
                 <div className="dice-container">
                     <div className="dice-sidebar">

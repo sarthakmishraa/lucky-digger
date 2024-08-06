@@ -219,3 +219,13 @@ button {
     margin-top: 20px;
   }
 }
+
+@media screen and (min-width: 970px) {
+  .home {
+    display: flex;
+    flex-direction: column;
+  }
+  .images-container {
+    align-items: center;
+  }
+}
