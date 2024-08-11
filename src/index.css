@@ -185,6 +185,34 @@ button {
   text-decoration: underline;
 }
 
+.how-to-play {
+  cursor: pointer;
+  text-align: right;
+}
+
+.how-to-play:hover {
+  text-decoration: underline;
+}
+
+.how-to-play-dialog {
+  max-width: 480px;
+  background-color: lightgray;
+  opacity: 0.9;
+  border-radius: 10px;
+  font-size: large;
+  text-align: center;
+}
+
+.how-to-play-dialog-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid black;
+  margin-bottom: 20px;
+  font-size: x-large;
+}
+
 @media screen and (max-width: 700px) {
   body {
     padding-left: 50px;
@@ -205,6 +233,13 @@ button {
   .mines-card-safe, .mines-card-bomb, .mines-card-safe-clicked {
     width: 80px;
     height: 80px;
+  }
+  .how-to-play-dialog {
+    width: 300px;
+  }
+  .how-to-play-dialog img {
+    width: 200px;
+    height: 200px;
   }
 }
 

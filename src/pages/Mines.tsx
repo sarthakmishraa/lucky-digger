@@ -12,6 +12,7 @@ export const Mines = () => {
     const [multiplierValue, setMultiplierValue] = useState<number | undefined>();
 
     const amountRef = useRef<any>();
+    const dialogRef = useRef<any>();
 
     const modifyAmount = (multiplier: number) => {
         if (amount && amount*multiplier<=100 && amount*multiplier>=1){
@@ -62,6 +63,14 @@ export const Mines = () => {
         }    
     };
 
+    const openHowToPlay = () => {
+        dialogRef.current.show();
+    };
+
+    const closeHowToPlay = () => {
+        dialogRef.current.close();
+    };
+
     useEffect(() => {
         if(tilesClicked) {
             const rewardRate = 0.1;
@@ -74,6 +83,21 @@ export const Mines = () => {
         <>
             <div>
                 <h1>Mines</h1>
+                <h2 className="how-to-play" onClick={openHowToPlay}>How to play?</h2>
+                <dialog className="how-to-play-dialog" ref={dialogRef} >
+                    <div className="how-to-play-dialog-heading">
+                        <h3>HOW TO PLAY MINES ?</h3>
+                        <button onClick={closeHowToPlay}>Close</button>
+                    </div>
+                    <img width={400} height={400} src="./mines_snip.png" />
+                    <p>Each tile hides either a safe tile(green) or a mine (red)</p>
+                    <p>
+                        To boost your chances of winning and earn larger prizes,
+                        expand the safe playing area. You can choose to collect your winnings by
+                        cashing out after each round or continue playing for a potentially bigger payout.
+                    </p>
+                </dialog>
+                
                 <h2>Balance: { balance } USD</h2>
             </div>
             <div className="mines-container">
