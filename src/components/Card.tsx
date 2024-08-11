@@ -35,11 +35,13 @@ export const Card = (props: Props) => {
         setTilesClicked(tilesClicked + 1);
         const rewardRate = 0.1;
         const multiplier  = (1 + rewardRate)**tilesClicked;
+
         const reward = amount * multiplier;
         const probSafeTile = (25 - tilesClicked - mines)/(25 - tilesClicked);
-        const temp = probSafeTile * reward;
+        const temp = reward / probSafeTile;
+
         setBetAmount(temp);
-        mineRef.current.className = "mines-card-safe-clicked"
+        mineRef.current.className = "mines-card-safe-clicked";
     }
     const lostBet = () => {
         setTilesClicked(0);
