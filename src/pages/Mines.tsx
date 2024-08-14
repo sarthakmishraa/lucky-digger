@@ -84,7 +84,7 @@ export const Mines = () => {
             <div>
                 <h1>Mines</h1>
                 <h2 className="how-to-play" onClick={openHowToPlay}>How to play?</h2>
-                <dialog className="how-to-play-dialog" ref={dialogRef} >
+                <dialog className="dialog-style" ref={dialogRef} >
                     <div className="how-to-play-dialog-heading">
                         <h3>HOW TO PLAY MINES ?</h3>
                         <button onClick={closeHowToPlay}>Close</button>

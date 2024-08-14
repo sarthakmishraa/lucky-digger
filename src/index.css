@@ -156,7 +156,11 @@ button {
   border-radius: 5px;
 }
 
-.mines-card-bomb:active {
+.mines-card-bomb-clicked {
+  width: 114px;
+  height: 114px;
+  border-radius: 5px;
+  pointer-events: none;
   background-color: red;
 }
 
@@ -194,7 +198,7 @@ button {
   text-decoration: underline;
 }
 
-.how-to-play-dialog {
+.dialog-style {
   max-width: 480px;
   background-color: lightgray;
   opacity: 0.9;

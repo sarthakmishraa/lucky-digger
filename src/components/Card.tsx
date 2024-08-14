@@ -18,6 +18,9 @@ interface Props {
 
 export const Card = (props: Props) => {
     const mineRef = useRef<any>();
+    const mineLostRef = useRef<any>();
+
+    const lostDialogRef = useRef<any>();
 
     const value = props.value;
     const index = props.index;
@@ -44,14 +47,25 @@ export const Card = (props: Props) => {
         mineRef.current.className = "mines-card-safe-clicked";
     }
     const lostBet = () => {
+        mineLostRef.current.className = "mines-card-bomb-clicked"
+        lostDialogRef.current.show();
+        
+    };
+
+    const closeLostDialogRef = () => {
+        lostDialogRef.current.close();
         setTilesClicked(0);
         setGameStarted(false);
         setMultiplierValue(undefined);
-    }
+    };
 
     return(
         <div className="mines-card">
-            {
+            <dialog className="dialog-style" ref={lostDialogRef} >
+                <p>Oops, you clicked on a mine</p>
+                <p>You lost ${ amount.toFixed(2) }</p>
+                <button onClick={closeLostDialogRef}>Close</button>
+            </dialog>{
                 gameStarted && value === 1 ? (
                     <div
                         id={index.toString()}
@@ -61,7 +75,7 @@ export const Card = (props: Props) => {
                     >
                     </div>
                 ):(
-                    <div onClick={lostBet} className="mines-card-bomb"></div>
+                    <div onClick={lostBet} className="mines-card-bomb" ref={mineLostRef}></div>
                 )
             }
         </div>
