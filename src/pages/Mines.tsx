@@ -8,6 +8,7 @@ export const Mines = () => {
     const [mines, setMines] = useState<number>(1);
     const [arr, setArr] = useState<number[]>(Array(25).fill(1));
     const [gameStarted, setGameStarted] = useState<boolean>(false);
+    const [gameOver, setGameOver] = useState<boolean>(false);
     const [tilesClicked, setTilesClicked] = useState<number | undefined>(1);
     const [multiplierValue, setMultiplierValue] = useState<number | undefined>();
 
@@ -150,7 +151,7 @@ export const Mines = () => {
                             <button type="submit" disabled={gameStarted} >Play</button>
                             {
                                 gameStarted &&
-                                <button disabled={!gameStarted} onClick={cashoutBetAmount} >Cashout {betAmount?.toFixed(2)} USD</button> 
+                                <button disabled={(!gameStarted) || gameOver} onClick={cashoutBetAmount} >Cashout {betAmount?.toFixed(2)} USD</button> 
                             }
                             
                         </div>
@@ -173,6 +174,7 @@ export const Mines = () => {
                                 amount={amount as number}
                                 betAmount={betAmount as number}
                                 gameStarted={gameStarted}
+                                setGameOver={setGameOver}
                                 setBalance={setBalance}
                                 setBetAmount={setBetAmount}
                                 setGameStarted={setGameStarted as React.Dispatch<React.SetStateAction<boolean>>}

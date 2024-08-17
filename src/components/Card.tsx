@@ -9,6 +9,7 @@ interface Props {
     betAmount: number,
     tilesClicked: number,
     gameStarted: boolean,
+    setGameOver: React.Dispatch<React.SetStateAction<boolean>>,
     setBalance: React.Dispatch<React.SetStateAction<number>>,
     setBetAmount: React.Dispatch<React.SetStateAction<number | undefined>>,
     setGameStarted: React.Dispatch<React.SetStateAction<boolean>>,
@@ -31,6 +32,7 @@ export const Card = (props: Props) => {
 
     const setBetAmount = props.setBetAmount;
     const setGameStarted = props.setGameStarted;
+    const setGameOver = props.setGameOver;
     const setTilesClicked = props.setTilesClicked;
     const setMultiplierValue = props.setMultiplierValue;
 
@@ -47,7 +49,8 @@ export const Card = (props: Props) => {
         mineRef.current.className = "mines-card-safe-clicked";
     }
     const lostBet = () => {
-        mineLostRef.current.className = "mines-card-bomb-clicked"
+        mineLostRef.current.className = "mines-card-bomb-clicked";
+        setGameOver(true);
         lostDialogRef.current.show();
         
     };
@@ -57,6 +60,7 @@ export const Card = (props: Props) => {
         setTilesClicked(0);
         setGameStarted(false);
         setMultiplierValue(undefined);
+        setGameOver(false);
     };
 
     return(
